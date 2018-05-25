@@ -1,0 +1,114 @@
+#root, .provider, .container {
+  width: 100%;
+  height: 100%;
+}
+
+.header-container {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(white, rgb(194, 191, 191));
+  justify-content: space-between;
+  align-items: center;
+}
+
+.differentScreens {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin: 0 10px 0 10px;
+}
+
+.header-right, .header-center, .header-left {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-close, .action-minimize, .action-fullscreen {
+  -webkit-appearance: none;
+  border-radius: 150%;
+  height: 14px;
+  width: 10px;
+  margin: 5px;
+  border: 1px solid grey;
+}
+
+.action-close {
+  background-color: red;
+}
+
+.action-minimize {
+  background-color: yellow;
+}
+
+.action-fullscreen {
+  background-color: rgb(14, 189, 14);
+}
+
+.calendar-button {
+  width: 90px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.initial-container {
+  height: 100%;
+  width: 98%;
+}
+
+.initial-month {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+}
+
+.days-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 10%;
+}
+
+.days-list h3 {
+  text-align: right;
+  padding-right: 7px;
+}
+
+.month-grid {
+  width: 100%;
+  height: 80%;
+}
+
+.squares {
+  height: 100%;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows:repeat(6, 1fr);
+}
+
+.squares li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin-left: 0;
+  border: 1px solid lightgray;
+}
+
+.squares li p {
+  position: relative;
+  right: 5px;
+  top: 5px;
+}
