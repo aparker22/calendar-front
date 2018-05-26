@@ -32,14 +32,19 @@ let monthArray = (daysInMonth) => {
 }
     
 let GetSquares = ({dayArray, events}) =>  {  
+    let returnComponent;
     return <ul className="squares">{
         dayArray.map((day) => {
+            events.map((event) => {
             if (day === events[0].day) {
-                    return <EventSquare day={day} event={events[0]} />
+                returnComponent = <EventSquare day={day} event={events[0]} />
                } else { 
-                   return <Square day={day} />
+                returnComponent = <Square day={day} />
                }
+            return returnComponent;
         })
+        return returnComponent
+    })
     }</ul>
 };
 

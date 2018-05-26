@@ -1,12 +1,15 @@
 import React from 'react';
 import MonthGrid from './MonthGrid.js';
 
-let InitialScreen = () => 
+let InitialScreen = () => {
+    let leftArrow = '<';
+    let rightArrow = '>';
+    return( 
     <div className="initial-container">
         <div className="initial-month">
             <h1>May</h1>
             <div>
-                <button value="<"></button>Today<button value=">"></button>
+                <button>{leftArrow}</button>Today<button>{rightArrow}</button>
             </div>
         </div>
         <div className="days-list">
@@ -20,6 +23,7 @@ let InitialScreen = () =>
         </div>
         <MonthGrid />
     </div>
+)}
 
         
 

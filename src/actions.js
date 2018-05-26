@@ -5,9 +5,19 @@ let updateEventsAction = (state, action) => {
   }
 updateEvents.toString = () => UPDATE_EVENTS;
 
+const TOGGLE_ADD_EVENT = "TOGGLE_ADD_EVENT";
+export let toggleAddEvent = () => ({type: TOGGLE_ADD_EVENT});
+let toggleEventAction = (state, action) => {
+    if (state.addEventActive === false) {
+        return ({...state, addEventActive: true});
+    } else return ({...state, addEventActive: false});
+  }
+toggleAddEvent.toString = () => TOGGLE_ADD_EVENT;
+
 
 let reducers = {
     [updateEvents]: updateEventsAction,
+    [toggleAddEvent]:toggleEventAction
 }
 
 export default reducers;

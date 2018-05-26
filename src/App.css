@@ -100,15 +100,63 @@
 
 .squares li {
   display: flex;
-  align-items: center;
-  justify-content: center;
   list-style: none;
+  flex-direction: column;
   margin-left: 0;
   border: 1px solid lightgray;
 }
 
-.squares li p {
-  position: relative;
-  right: 5px;
-  top: 5px;
+.squares li span {
+  text-align: right;
 }
+
+.event-component {
+  display: flex;
+  z-index: 1;
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background-color: gray;
+  border: 1px solid black;
+  width: 50%;
+  height: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.event-form {
+  -webkit-appearance: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-form div {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.event-form div p{
+  width: 30%;
+  text-align: right;
+}
+
+.event-form div input {
+  -webkit-appearance: none;
+  width: 70%;
+}
+
+.event-form button {
+  -webkit-appearance: none;
+  width: 50%;
+  margin: 10px;
+  height: 40px;
+}
+

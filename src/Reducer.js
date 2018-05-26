@@ -6,7 +6,9 @@ const initialState = {
             "start": "9:00 am",
             "end": "11:00 am",
             "description": "Birthday Party"}
-        ]
+        ],
+    addEventActive: false,
+    activeView: "month",
     }
 
 let fallbackReducer = state => state; 

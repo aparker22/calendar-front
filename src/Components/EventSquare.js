@@ -3,7 +3,7 @@ import {addEventToDatabase} from './helperFunctions/fetches';
 
 let EventSquare = ({day, event}) => {
     return <li onClick={() => addEventToDatabase()}>
-        <p>{day}</p>
+        <span>{day}</span>
         <p>{event.description}</p>
     </li>
 }
