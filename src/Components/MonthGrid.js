@@ -26,27 +26,14 @@ let daysInMonth  = (month, year) => {
 let monthArray = (daysInMonth) => {
     let newArray = []
     for (var i=1; i <=daysInMonth; i++) {
-        newArray.push(i);
+        newArray.push({"day": i, "event": []});
     }
     return newArray;
 }
+
+
     
-let GetSquares = ({dayArray, events}) =>  {  
-    let returnComponent;
-    return <ul className="squares">{
-        dayArray.map((day) => {
-            events.map((event) => {
-            if (day === events[0].day) {
-                returnComponent = <EventSquare day={day} event={events[0]} />
-               } else { 
-                returnComponent = <Square day={day} />
-               }
-            return returnComponent;
-        })
-        return returnComponent
-    })
-    }</ul>
-};
+
 
 let dayCount = daysInMonth(month, year);
 let dayArray = monthArray(dayCount);
@@ -61,8 +48,22 @@ class MonthGrid extends Component {
     render() {
         let {events} = this.props;
 
+        let GetSquares = () =>  {
+            let monthEventArray = dayArray.map(day => day); 
+            events.map((event1) => {
+                return (monthEventArray[event1.day-1].event).push(event1);
+            })
+            return monthEventArray;
+        };
+        
+        let monthEventArray = GetSquares();
+
         return <div className="month-grid">
-            <GetSquares dayArray={dayArray} events={events} />
+            <ul className="squares">{
+                monthEventArray.map((day) => {
+                    return <EventSquare date={day} />
+                })
+            }</ul>
         </div>
     }
 }

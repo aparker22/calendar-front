@@ -1,10 +1,22 @@
 import React from 'react';
 import {addEventToDatabase} from './helperFunctions/fetches';
 
-let EventSquare = ({day, event}) => {
+let fun = (event) => {
+    if (event.length > 0 ) {
+        return event.map((element) =>{
+            return <p>{element.description}</p>
+        })
+        } else {
+        return null;
+    }
+}
+
+let EventSquare = ({date}) => {
     return <li onClick={() => addEventToDatabase()}>
-        <span>{day}</span>
-        <p>{event.description}</p>
+        <span>{date.day}</span>
+        <div>{
+           fun(date.event) 
+    }</div>
     </li>
 }
 
