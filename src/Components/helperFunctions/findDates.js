@@ -1,14 +1,16 @@
 import moment from 'moment';
 
 let now = moment();
+let daysInMonth  = now.daysInMonth();
 
 export let dateObject = {
     currentDate: now.date(),
     currentMonth: now.month(),
-    firstDayOfMonth: now.date(1).day()
+    firstDayOfMonth: now.date(1).day(),
+    lastDayOfMonth: now.date(daysInMonth).day()
 };
 
-let daysInMonth  = now.daysInMonth();
+
 
 let monthArray = (daysInMonth) => {
     let newArray = []

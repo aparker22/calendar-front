@@ -5,6 +5,13 @@ let updateEventsAction = (state, action) => {
   }
 updateEvents.toString = () => UPDATE_EVENTS;
 
+const UPDATE_DATE_OBJECT = "UPDATE_DATE_OBJECT";
+export let updateDateObject = (dateObject) => ({type: UPDATE_DATE_OBJECT, payload: dateObject});
+let updateDateObjectAction = (state, action) => {
+    return ({...state, dateObject: action.payload});
+  }
+updateDateObject.toString = () => UPDATE_DATE_OBJECT;
+
 const TOGGLE_ADD_EVENT = "TOGGLE_ADD_EVENT";
 export let toggleAddEvent = () => ({type: TOGGLE_ADD_EVENT});
 let toggleEventAction = (state, action) => {
@@ -17,7 +24,8 @@ toggleAddEvent.toString = () => TOGGLE_ADD_EVENT;
 
 let reducers = {
     [updateEvents]: updateEventsAction,
-    [toggleAddEvent]:toggleEventAction
+    [toggleAddEvent]:toggleEventAction,
+    [updateDateObject]: updateDateObjectAction
 }
 
 export default reducers;

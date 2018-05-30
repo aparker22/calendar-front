@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import EventSquare from './CalendarComponents/EventSquare';
 import {fetchEventList} from './helperFunctions/fetches';
-import {updateEvents} from '../actions';
+import {updateEvents, updateDateObject} from '../actions';
 import dayArray, {dateObject} from './helperFunctions/findDates';
 
 
@@ -18,7 +18,8 @@ class MonthGrid extends Component {
 
     componentDidMount() {
         fetchEventList('may')
-        .then(res => this.props.dispatch(updateEvents(res)))
+        .then(res => this.props.dispatch(updateEvents(res)));
+        this.props.dispatch(updateDateObject(dateObject));
     }
 
     render() {
@@ -32,9 +33,9 @@ class MonthGrid extends Component {
             return monthEventArray;
         };
 
-        let AddBlankSquares = () => {
+        let AddBlankSquares = ({number}) => {
             let children = []
-            for (var i=dateObject.firstDayOfMonth; i > 0; i--) {
+            for (var i=number; i > 0; i--) {
                 children.push(<li></li>)
             } 
             return children;
@@ -42,7 +43,7 @@ class MonthGrid extends Component {
 
         let AddDateSquares = () => {
             return monthEventArray.map((day) => {
-                return <EventSquare date={day} blanks={dateObject.firstDayOfMonth}/>
+                return <EventSquare date={day} highlightedDate={dateObject.currentDate}/>
             })
         }
         
@@ -50,8 +51,9 @@ class MonthGrid extends Component {
 
         return <div className="month-grid">
             <ul className="squares">
-            <AddBlankSquares />
+            <AddBlankSquares number={dateObject.firstDayOfMonth}/>
             <AddDateSquares />
+            <AddBlankSquares number={6-dateObject.lastDayOfMonth} />
             </ul>
         </div>
     }
