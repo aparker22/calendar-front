@@ -12,6 +12,9 @@ let submitEvent = (event, dispatch) => {
 let EventComponent = ({addEventActive, dispatch}) => {
     if (addEventActive === true) {
         return <div className="event-component">
+            <span className="event-close" onClick={() => {
+                dispatch(toggleAddEvent())}
+            }>close</span>
             <h3>Enter New Event</h3>
             <form className="event-form" onSubmit={(event) => submitEvent(event, dispatch)}>
                 <div><p>Month:</p><input name="month"></input></div>

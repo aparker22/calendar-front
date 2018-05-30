@@ -1,5 +1,11 @@
 import React from 'react';
-import {addEventToDatabase} from '../helperFunctions/fetches';
+import {connect} from 'react-redux';
+import {toggleAddEvent} from '../../actions';
+
+
+let mapDispatchToProps = (dispatch, props) => {
+    return {dispatch: dispatch}
+};
 
 let fun = (event) => {
     if (event.length > 0 ) {
@@ -11,17 +17,20 @@ let fun = (event) => {
     }
 }
 
-let EventSquare = ({date, highlightedDate}) => {
-    console.log(highlightedDate)
+let EventSquare = ({date, highlightedDate, dispatch}) => {
     if (date.day === highlightedDate) {
-        return <li className="highlight" onClick={() => addEventToDatabase()}>
+        return <li className="highlight" onClick={() => {
+            dispatch(toggleAddEvent())}
+        }>
                 <span>{date.day}</span>
                 <div>{
                 fun(date.event) 
             }</div>
             </li>
     } else {
-    return <li onClick={() => addEventToDatabase()}>
+    return <li onClick={() => {
+        dispatch(toggleAddEvent())}
+    }>
         <span>{date.day}</span>
         <div>{
            fun(date.event) 
@@ -30,4 +39,4 @@ let EventSquare = ({date, highlightedDate}) => {
     }
 }
 
-export default EventSquare;
+export default connect(null, mapDispatchToProps)(EventSquare);

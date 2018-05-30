@@ -160,6 +160,11 @@
   height: 40px;
 }
 
+.event-close {
+  cursor: pointer;
+  width: 100%;
+  text-align: right;
+}
 
 .highlight {
   background-color: pink;
