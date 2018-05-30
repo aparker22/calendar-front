@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import EventSquare from './CalendarComponents/EventSquare';
 import {fetchEventList} from './helperFunctions/fetches';
 import {updateEvents} from '../actions';
-import dayArray from './helperFunctions/findDates';
+import dayArray, {dateObject} from './helperFunctions/findDates';
 
 
 let mapStateToProps = (state) => {
@@ -12,9 +12,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {dispatch: dispatch}
-  };
-
-
+};
 
 class MonthGrid extends Component {
 
@@ -33,15 +31,28 @@ class MonthGrid extends Component {
             })
             return monthEventArray;
         };
+
+        let AddBlankSquares = () => {
+            let children = []
+            for (var i=dateObject.firstDayOfMonth; i > 0; i--) {
+                children.push(<li></li>)
+            } 
+            return children;
+        }
+
+        let AddDateSquares = () => {
+            return monthEventArray.map((day) => {
+                return <EventSquare date={day} blanks={dateObject.firstDayOfMonth}/>
+            })
+        }
         
         let monthEventArray = GetSquares();
 
         return <div className="month-grid">
-            <ul className="squares">{
-                monthEventArray.map((day) => {
-                    return <EventSquare date={day} />
-                })
-            }</ul>
+            <ul className="squares">
+            <AddBlankSquares />
+            <AddDateSquares />
+            </ul>
         </div>
     }
 }
