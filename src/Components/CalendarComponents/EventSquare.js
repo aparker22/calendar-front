@@ -1,5 +1,5 @@
 import React from 'react';
-import {addEventToDatabase} from './helperFunctions/fetches';
+import {addEventToDatabase} from '../helperFunctions/fetches';
 
 let fun = (event) => {
     if (event.length > 0 ) {

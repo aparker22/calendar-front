@@ -9,6 +9,7 @@ const initialState = {
         ],
     addEventActive: false,
     activeView: "month",
+    dateObject: {}
     }
 
 let fallbackReducer = state => state; 

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Square from './Square';
-import EventSquare from './EventSquare';
+import EventSquare from './CalendarComponents/EventSquare';
 import {fetchEventList} from './helperFunctions/fetches';
 import {updateEvents} from '../actions';
+import dayArray from './helperFunctions/findDates';
 
 
 let mapStateToProps = (state) => {
@@ -15,28 +15,6 @@ let mapDispatchToProps = (dispatch) => {
   };
 
 
-let today = new Date();
-let month = today.getMonth() + 1;
-let year = today.getFullYear();
-
-let daysInMonth  = (month, year) => {
-    return new Date(year, month, 0).getDate();
-}
-
-let monthArray = (daysInMonth) => {
-    let newArray = []
-    for (var i=1; i <=daysInMonth; i++) {
-        newArray.push({"day": i, "event": []});
-    }
-    return newArray;
-}
-
-
-    
-
-
-let dayCount = daysInMonth(month, year);
-let dayArray = monthArray(dayCount);
 
 class MonthGrid extends Component {
 
