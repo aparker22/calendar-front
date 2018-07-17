@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import ActionComponents from './HeaderComponents/ActionComponents';
 import ChooseViewScreenButtons from './HeaderComponents/ChooseViewScreenButtons';
 import SearchBarComponent from './HeaderComponents/SearchBarComponent'
@@ -6,17 +7,24 @@ import SearchBarComponent from './HeaderComponents/SearchBarComponent'
 class HeaderComponent extends Component {
     constructor(props) {
 		super(props);
-		this.state = {activeView: "Month"};
+		this.state = {activeView: "Month", addEventActive: false}
     }
 
+
     render () {
+        let {addEventActive} = this.props
+
         return(
         <div className="header-container">
-            <ActionComponents />
+            <ActionComponents addEventActive={addEventActive}/>
             <ChooseViewScreenButtons />
             <SearchBarComponent />
         </div>    
     )}
 }
 
-export default HeaderComponent;
+let mapStateToProps = (state) => {
+    return {addEventActive: state.addEventActive, activeView: state.activeView}
+}
+
+export default connect(mapStateToProps)(HeaderComponent);

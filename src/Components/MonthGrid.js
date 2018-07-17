@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Square from './Square';
-import EventSquare from './EventSquare';
+import EventSquare from './CalendarComponents/EventSquare';
 import {fetchEventList} from './helperFunctions/fetches';
-import {updateEvents} from '../actions';
+import {updateEvents, updateDateObject} from '../actions';
+import dayArray, {dateObject} from './helperFunctions/findDates';
 
 
 let mapStateToProps = (state) => {
@@ -12,52 +12,49 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {dispatch: dispatch}
-  };
-
-
-let today = new Date();
-let month = today.getMonth() + 1;
-let year = today.getFullYear();
-
-let daysInMonth  = (month, year) => {
-    return new Date(year, month, 0).getDate();
-}
-
-let monthArray = (daysInMonth) => {
-    let newArray = []
-    for (var i=1; i <=daysInMonth; i++) {
-        newArray.push(i);
-    }
-    return newArray;
-}
-    
-let GetSquares = ({dayArray, events}) =>  {  
-    return <ul className="squares">{
-        dayArray.map((day) => {
-            if (day === events[0].day) {
-                    return <EventSquare day={day} event={events[0]} />
-               } else { 
-                   return <Square day={day} />
-               }
-        })
-    }</ul>
 };
-
-let dayCount = daysInMonth(month, year);
-let dayArray = monthArray(dayCount);
 
 class MonthGrid extends Component {
 
     componentDidMount() {
         fetchEventList('may')
-        .then(res => this.props.dispatch(updateEvents(res)))
+        .then(res => this.props.dispatch(updateEvents(res)));
+        this.props.dispatch(updateDateObject(dateObject));
     }
 
     render() {
         let {events} = this.props;
 
+        let GetSquares = () =>  {
+            let monthEventArray = dayArray.map(day => day); 
+            events.map((event1) => {
+                return (monthEventArray[event1.day-1].event).push(event1);
+            })
+            return monthEventArray;
+        };
+
+        let AddBlankSquares = ({number}) => {
+            let children = []
+            for (var i=number; i > 0; i--) {
+                children.push(<li></li>)
+            } 
+            return children;
+        }
+
+        let AddDateSquares = () => {
+            return monthEventArray.map((day) => {
+                return <EventSquare date={day} highlightedDate={dateObject.currentDate}/>
+            })
+        }
+        
+        let monthEventArray = GetSquares();
+
         return <div className="month-grid">
-            <GetSquares dayArray={dayArray} events={events} />
+            <ul className="squares">
+            <AddBlankSquares number={dateObject.firstDayOfMonth}/>
+            <AddDateSquares />
+            <AddBlankSquares number={6-dateObject.lastDayOfMonth} />
+            </ul>
         </div>
     }
 }
